@@ -17,20 +17,22 @@ gulp.task('styles', () => {
 	 .pipe(reload({stream: true}));
 });
 
-gulp.task('watch', () => {
-	gulp.watch('./dev/styles/**/*.scss', ['styles']);
-	gulp.watch('./dev/scripts/app.js', ['scripts']);
-	gulp.watch('*.html', reload);
-});
 
 gulp.task('scripts', () => {
 	gulp.src('./dev/scripts/app.js')
-		.pipe(babel({
-			presets: ['@babel/env']
-		}))
+		// .pipe(babel({
+		//   	presets: ['@babel/env']
+		// }))
 		.pipe(gulp.dest('./public/scripts'))
 		.pipe(reload({stream: true}));
 });
+
+gulp.task('watch', () => {
+	gulp.watch('./dev/styles/**/*.scss', ['styles']);
+	gulp.watch('./dev/scripts/*.js', ['scripts']);
+	gulp.watch('*.html', reload);
+});
+
 
 gulp.task('browser-sync', () => {
 	browserSync.init({
